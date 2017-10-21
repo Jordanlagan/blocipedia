@@ -1,24 +1,11 @@
-# README
+# Thanks for checking out my Wiki app Blocipedia
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an app running with Ruby (2.4.1) on Rails (5.1.4) and Devise (4.3.0).
 
-Things you may want to cover:
+## SETUP
 
-* Ruby version
+ * fork the project
 
-* System dependencies
+ * run `bundle` to install dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+ * run `rails db:migrate'`
