@@ -1,0 +1,12 @@
+<%= form_for @wiki do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title, placeholder: "Enter Wiki title" %>
+
+  <%= f.label :body %>
+  <%= f.text_area :body, rows: 10, placeholder: "Enter Wiki body" %>
+
+  <%= f.label :private %>
+  <%= f.check_box :private %>
+
+  <%= f.submit "Save" %>
+<% end %>
