@@ -1,7 +1,7 @@
 <h1>All Wikis</h1>
 
 <% @wikis.each do |wiki| %>
-  <p><%= link_to wiki.title, wiki_path(wiki.id) %></p>
+  <p><%= link_to wiki.title, wiki_path(wiki.id) %> | <small>Last edited by: <%= wiki.user.email %></small></p>
 <% end %>
 
 <%= link_to "New Wiki", new_wiki_path(@wiki), class: 'btn btn-success' %>
