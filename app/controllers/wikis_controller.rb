@@ -1,14 +1,18 @@
 class WikisController < ApplicationController
+after_action :verify_authorized, except: :index
+
   def index
     @wikis = Wiki.all
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def new
     @wiki = Wiki.new
+    authorize @wiki
   end
 
   def create
@@ -18,6 +22,7 @@ class WikisController < ApplicationController
     @wiki.private = params[:wiki][:private]
     @wiki.user = current_user
 
+    authorize @wiki
     if @wiki.save
 
       flash[:notice] = "Wiki was saved."
@@ -30,6 +35,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def update
@@ -39,6 +45,7 @@ class WikisController < ApplicationController
     @wiki.private = params[:wiki][:private]
     @wiki.user = current_user
 
+    authorize @wiki
     if @wiki.save
 
       flash[:notice] = "Wiki was updated."
@@ -46,12 +53,14 @@ class WikisController < ApplicationController
     else
       flash.now[:alert] = "There was an error saving the Wiki."
       render :edit
+
     end
   end
 
   def destroy
     @wiki = Wiki.find(params[:id])
 
+    authorize @wiki
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted."
       redirect_to wikis_path
