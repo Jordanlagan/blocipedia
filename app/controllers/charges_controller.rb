@@ -18,6 +18,7 @@ class ChargesController < ApplicationController
       currency: 'usd'
     )
 
+    current_user.premium!
     flash[:notice] = "Thanks for your purchase, #{current_user.email}"
     redirect_to wikis_path
 
@@ -33,5 +34,11 @@ class ChargesController < ApplicationController
       description: "BigMoney Membership - #{current_user.name}",
       amount: @price
     }
+  end
+
+  def downgrade
+    current_user.standard!
+    flash[:notice] = "You are now a standard user :("
+    redirect_to wikis_path
   end
 end
