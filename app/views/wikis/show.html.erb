@@ -1,6 +1,6 @@
 <h1><%= @wiki.title %></h1>
-<small>Last Edited By: <%= @wiki.user.email %></small>
-<p><%= @wiki.body %></p>
+<small>Wiki Owner: <%= @wiki.user.email %></small>
+<p><%= markdown(@wiki.body) %></p>
 
 <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
 <%= link_to "Delete wiki", @wiki, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this wiki?'} %>
