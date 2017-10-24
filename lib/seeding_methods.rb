@@ -12,6 +12,10 @@ module SeedingMethods
   end
 
   def self.get_body
-    Faker::Lorem.sentence(1, true, 4) + " " + Faker::Lorem.sentence(1, true, 4) + " " + Faker::Lorem.sentence(1, true, 4)
+    body = ""
+    4.times do
+      body += Faker::Lorem.sentence(1, true, 4) + " " + Faker::Lorem.sentence(1, true, 4) + " " + Faker::Lorem.sentence(1, true, 4) + " "
+    end
+    body
   end
 end

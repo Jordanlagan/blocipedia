@@ -11,29 +11,32 @@
 
   <body>
     <div class="container">
-      <ul class="nav nav-tabs">
-          <li> <%= link_to "Blocipedia", wikis_path %> </li>
-          <li> <%= link_to "About", about_path %> </li>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div calss="container">
+          <li class="navbar-brand"> <%= link_to "Blocipedia", wikis_path %> </li>
+          <ul class="nav navbar-nav">
+              <li><%= link_to "About", about_path %></li>
 
-          <div class="user-info">
-          <% if user_signed_in? %>
-            Signed in as: <strong> <%= current_user.email %> </strong> |
-            <%= link_to "Edit profile", edit_user_registration_path, :class => 'navbar-link' %> |
-            <%= link_to "Logout", destroy_user_session_path, method: :delete %> |
+              <div class="user-info">
+              <% if user_signed_in? %>
+                Signed in as: <strong> <%= current_user.email %> </strong> |
+                <%= link_to "Edit profile", edit_user_registration_path, :class => 'navbar-link' %> |
+                <%= link_to "Logout", destroy_user_session_path, method: :delete %> |
 
-            <% if current_user.role == 'standard' %>
-              <%= link_to "Upgrade to Premium", new_charge_path %>
-            <% else %>
-              <%= link_to "Downgrade to Standard", downgrade_path, data: {confirm: 'Are you sure you want to downgrade? All private Wikis will be made public!' } %>
-            <% end %>
+                <% if current_user.role == 'standard' %>
+                  <%= link_to "Upgrade to Premium", new_charge_path %>
+                <% else %>
+                  <%= link_to "Downgrade to Standard", downgrade_path, data: {confirm: 'Are you sure you want to downgrade? All private Wikis will be made public!' } %>
+                <% end %>
 
-          <% else %>
-            <%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link' %> -
-            <%= link_to "Sign In", new_user_session_path, :class => 'navbar-link' %>
-          <% end %>
-          </div>
-      </ul>
-
+              <% else %>
+                <%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link' %> -
+                <%= link_to "Sign In", new_user_session_path, :class => 'navbar-link' %>
+              <% end %>
+              </div>
+          </ul>
+        </div>
+      </nav>
 
       <% if flash[:notice] %>
         <div class="alert alert-success">
