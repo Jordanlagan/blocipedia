@@ -11,6 +11,14 @@ class WikiPolicy < ApplicationPolicy
     user.present?
   end
 
+  def show?
+    if record.private?
+      user.premium? || user.admin?
+    else
+      user.present?
+    end
+  end
+
   class Scope < Scope
     def resolve
       scope

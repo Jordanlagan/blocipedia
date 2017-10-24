@@ -48,3 +48,7 @@ gem 'faker'
 gem 'stripe'
 
 gem 'figaro', '1.0'
+
+gem 'bootstrap', '~> 4.0.0.beta2.1'
+
+gem 'jquery-rails'

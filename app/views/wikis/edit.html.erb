@@ -1,12 +1,10 @@
-<%= form_for @wiki do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title, placeholder: "Enter Wiki title" %>
+<h1>Edit Wiki</h1>
 
-  <%= f.label :body %>
-  <%= f.text_area :body, rows: 10, placeholder: "Enter Wiki body" %>
-
-  <%= f.label :private %>
-  <%= f.check_box :private %>
-
-  <%= f.submit "Save" %>
-<% end %>
+<div class="row">
+  <div class="col-md-4">
+    <p>You could make private wikis if you <%= link_to "upgraded", new_charge_path %> to premium</p>
+  </div>
+  <div class="col-md-8">
+    <%= render partial: 'form', locals: { wiki: @wiki } %>
+  </div>
+</div>

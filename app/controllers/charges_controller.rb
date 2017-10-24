@@ -38,7 +38,19 @@ class ChargesController < ApplicationController
 
   def downgrade
     current_user.standard!
+    set_private_wikis_to_public
     flash[:notice] = "You are now a standard user :("
     redirect_to wikis_path
+  end
+
+  private
+
+  def set_private_wikis_to_public
+    wikis = Wiki.all
+    wikis.each do |w|
+      if w.user.id == current_user.id
+        w.update_attribute(:private, false)
+      end
+    end
   end
 end
