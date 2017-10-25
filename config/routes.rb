@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'downgrade' => 'charges#downgrade'
 
+  resources :collaborators, only: [:create, :destroy]
+
   resources :wikis
 
   get 'about' => 'welcome#about'

@@ -1,10 +1,43 @@
-<h1>Edit Wiki</h1>
+<div class="container">
+  <h1>Edit Wiki</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <% if current_user.standard? %>
+        <p>You could make private wikis if you <%= link_to "upgraded", new_charge_path %> to premium</p>
+      <% else %>
+        <p>Thanks for being an awesome PREEMIUM member</p>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <%= render partial: 'form', locals: { wiki: @wiki } %>
+    </div>
+  </div>
 
-<div class="row">
-  <div class="col-md-4">
-    <p>You could make private wikis if you <%= link_to "upgraded", new_charge_path %> to premium</p>
-  </div>
-  <div class="col-md-8">
-    <%= render partial: 'form', locals: { wiki: @wiki } %>
-  </div>
+  <% if @wiki.private?  %>
+    <% if current_user == @wiki.user || current_user.admin?  %>
+      <h3 class="text-center">Manage Collaborators</h3>
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <%= form_tag collaborators_path do %>
+            <h4 class="text-center">Add New Collaborator</h4>
+            <div>
+              <%= hidden_field_tag :wiki, @wiki.id %>
+            </div>
+            <div>
+              <%= text_field_tag "email", nil, placeholder: "Enter User's Email" %>
+            </div>
+            <div>
+              <%= submit_tag(value = "Add") %>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <h4 class="text-center">Manage Existing Collaborators</h4>
+          <ul>
+            <%= render partial: 'collaborators', locals: { wiki: @wiki } %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>

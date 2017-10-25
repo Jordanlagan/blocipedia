@@ -1,0 +1,5 @@
+<% Collaborator.where(wiki_id: @wiki.id).each do |c| %>
+  <li><%= User.find(c.user_id).email %>
+    <%= link_to(raw('<span>&times;</span>'), collaborator_path(c.id), data: {:confirm => 'Are you sure?'}, :method => :delete) %>
+  </li>
+<% end %>
