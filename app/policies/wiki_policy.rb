@@ -14,7 +14,9 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def show?
-    !record.private? || record.user == user || WikisHelper.collabs_include_user?(user, record) || user.role == 'admin'
+    if user.present?
+      !record.private? || record.user == user || WikisHelper.collabs_include_user?(user, record) || user.role == 'admin'
+    end
   end
 
   class Scope
@@ -27,20 +29,30 @@ class WikiPolicy < ApplicationPolicy
 
     def resolve
       wikis = []
-      if user.role == 'admin'
-        wikis = scope.all
-      elsif user.role == 'premium'
-        all_wikis = scope.all
-        all_wikis.each do |wiki|
-          if !wiki.private? || wiki.user == user || WikisHelper.collabs_include_user?(user, wiki)
-            wikis << wiki
+      if user
+        if user.role == 'admin'
+          wikis = scope.all
+        elsif user.role == 'premium'
+          all_wikis = scope.all
+          all_wikis.each do |wiki|
+            if !wiki.private? || wiki.user == user || WikisHelper.collabs_include_user?(user, wiki)
+              wikis << wiki
+            end
+          end
+        elsif user.role == 'standard'
+          all_wikis = scope.all
+          wikis = []
+          all_wikis.each do |wiki|
+            if !wiki.private? || WikisHelper.collabs_include_user?(user, wiki)
+              wikis << wiki
+            end
           end
         end
       else
         all_wikis = scope.all
         wikis = []
         all_wikis.each do |wiki|
-          if !wiki.private? || WikisHelper.collabs_include_user?(user, wiki)
+          if !wiki.private?
             wikis << wiki
           end
         end

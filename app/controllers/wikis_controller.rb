@@ -6,7 +6,7 @@ after_action :verify_authorized, except: [:index]
   end
 
   def show
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
     authorize @wiki
   end
 
@@ -34,12 +34,12 @@ after_action :verify_authorized, except: [:index]
   end
 
   def edit
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.friendly.find(params[:id])
     authorize @wiki
   end
 
   def update
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
     @wiki.private = params[:wiki][:private]
@@ -57,7 +57,7 @@ after_action :verify_authorized, except: [:index]
   end
 
   def destroy
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
 
     authorize @wiki
     if @wiki.destroy

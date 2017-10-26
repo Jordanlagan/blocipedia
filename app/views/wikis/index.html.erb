@@ -4,7 +4,7 @@
   <div class="media">
     <div class="media-body">
       <h5 class="media-heading">
-        <p><%= link_to wiki.title, wiki_path(wiki.id) %><br> | <small>Wiki Owner: <%= wiki.user.email %></small>
+        <p><%= link_to wiki.title, wiki_path(wiki) %><br> | <small>Wiki Owner: <%= wiki.user.email %></small>
         <% if wiki.private? %>
           <strong>PRIVATE</strong></p>
         <% end %>

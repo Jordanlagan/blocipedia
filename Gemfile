@@ -54,3 +54,5 @@ gem 'bootstrap', '~> 4.0.0.beta2.1'
 gem 'jquery-rails'
 
 gem 'redcarpet', '~> 3.0.0'
+
+gem 'friendly_id', '~> 5.1.0'
