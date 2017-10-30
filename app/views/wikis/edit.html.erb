@@ -34,7 +34,9 @@
         <div class="col-md-6">
           <h4 class="text-center">Manage Existing Collaborators</h4>
           <ul>
-            <%= render partial: 'collaborators', locals: { wiki: @wiki } %>
+            <% Collaborator.where(wiki_id: @wiki.id).each do |c| %>
+              <%= render partial: 'collaborators', locals: { wiki: @wiki, collaborator: c } %>
+            <% end %>
           </ul>
         </div>
       </div>

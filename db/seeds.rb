@@ -11,15 +11,15 @@ require 'seeding_methods'
 
 roles = [:standard, :premium]
 
-user = User.create!( id: 0, email: "test@example.com", password: "helloworld", role: :admin, name: "Bob the Dinosaur" )
+user = User.create!( email: "test@example.com", password: "helloworld", role: :admin, name: "Bob the Dinosaur" )
 
 5.times do |t|
-  User.create!( id: t+1, email: SeedingMethods.get_email, password: "helloworld", role: roles.sample, name: SeedingMethods.get_name )
+  User.create!( email: SeedingMethods.get_email, password: "helloworld", role: roles.sample, name: SeedingMethods.get_name )
 end
 users = User.all
 
 25.times do |t|
-  Wiki.create!( id: t, title: SeedingMethods.get_title, body: SeedingMethods.get_body, private: false, user: users.sample )
+  Wiki.create!( title: SeedingMethods.get_title, body: SeedingMethods.get_body, private: false, user: users.sample )
 end
 
 puts "Users seeded"
