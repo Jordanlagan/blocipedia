@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'downgrade' => 'charges#downgrade'
 
+  get 'upgrade' => 'charges#upgrade'
+
   resources :collaborators, only: [:create, :destroy]
 
   resources :wikis

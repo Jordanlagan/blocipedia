@@ -43,4 +43,10 @@ class ChargesController < ApplicationController
     flash[:notice] = "You are now a standard user :("
     redirect_to wikis_path
   end
+
+  def upgrade
+    current_user.premium!
+    flash[:notice] = "You are now a premium user :)"
+    redirect_to wikis_path
+  end
 end
